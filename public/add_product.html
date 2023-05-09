@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des produits</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+    <div>
+        <h1>Service de rangement des produits du laboratoire</h1>
+        <h5>Pour rappel : les produits doivent être rangés selon les règles de sécurité</h5>
+    </div>
+    <div>
+        <h2>Entrez les informations du produit : </h2>
+        <form>
+            <label for="name">Nom du produit</label>
+            <input name="name" id="name" type="text">
+
+            <label for="dateP">Date de péremption</label>
+            <input name="dateP" id="dateP" type="date">
+
+            <label for="lieu">Lieu de stockage</label>
+            <input name="lieu" id="lieu" type="text">
+
+            <label for="fiche">Lien de la fiche de sécurite (PDF)</label>
+            <input name="fiche" id="fiche" type="text">
+
+            <input value="Ajouter un produit" type="submit">
+            <p id="error"></p>
+        </form>
+    </div>
+</body>
+</html>
