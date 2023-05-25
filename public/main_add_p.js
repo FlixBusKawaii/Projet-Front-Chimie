@@ -24,10 +24,9 @@ const check_Produit={
     DatePeremption: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/
 };
 
-const get_products = () => fetch(URL_FOR_PRODUCTS)
-    .then(res => res.json())
-    .then(json => constructTableProduct(json));
-
+const get_products = () => fetch(URL_FOR_PRODUCTS+"?key=Nom")
+    .then(res => res.json());
+/*
 const construct_picto = binary_seq => {
     let mot_picto = "";
     let i=1;
@@ -57,11 +56,11 @@ const constructTableProduct = tab => {
         `;
         table.appendChild(row); 
     }
-};
+};*/
 
 form_for_products.addEventListener("submit", event => {
     let type_of_data = 'Produit';
-    let rawdata = new FormData(form);
+    let rawdata = new FormData(form_for_products);
     let data = {};
     rawdata.forEach((value, key) => {
         if(value.match(check_Produit[key]) == null){
@@ -74,7 +73,8 @@ form_for_products.addEventListener("submit", event => {
     for(let input of document.querySelectorAll("form input:not([type='submit'])")){
         input.value = "";
     }
-    let final_data = {type_of_data, data};
+    let final_data = {key:type_of_data, data:data};
+    console.log(final_data);
     event.preventDefault();
     return add_product(final_data);
 });
@@ -86,7 +86,10 @@ const add_product = item => fetch(URL_FOR_PRODUCTS, {
     },
     body: JSON.stringify(item)
 })  .then(res=>res.text())
-    .then(alert("Votre produit a été placé dans l'armoire "+res+"."))
+    .then(res=>{
+        console.log(res);
+        alert("Votre produit a été placé dans l'armoire "+res+".");
+})
     .then(get_products);
 
 get_products();
