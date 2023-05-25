@@ -1,5 +1,5 @@
 # Projet Front Chimie
- This is the 'front' part of the web API for chemistry lab.
+ This is the 'front' part of the web API for chemical product management.
 # How to install it?
  In your NodeJS console, type "npm install" to get every required retained by the gitignore.
 # How to launch it?
