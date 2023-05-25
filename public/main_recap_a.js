@@ -33,11 +33,12 @@ const constructTableArmoire = tab => {
     for(let item of tab)
     {
         let row = document.createElement("tr");
-        row.id = "?-" + item.id;
+        row.id = "?-" + item.idArmoire;
         row.innerHTML = `
         <td>${item.idArmoire}</td>
         <td>${item.NomArmoire}</td>
         <td>${item.Localisation}</td>
+        <td><a href="detailled_armor.html?id=${item.idArmoire}"><img id="more" src="more.svg"></a></td>
         `;
         table.appendChild(row); 
     }

@@ -15,6 +15,10 @@ html, body {
     font-size: small;
 }
 
+table{
+    margin: 0 auto;
+}
+
 #more{
     width: 25px;
     height: 25px;
