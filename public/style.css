@@ -15,7 +15,7 @@ html, body {
     font-size: small;
 }
 
-img #more{
-    width: 10px;
-    height: 10px;
+#more{
+    width: 25px;
+    height: 25px;
 }

@@ -1,5 +1,5 @@
 const URL_FOR_PRODUCTS = 'http://localhost:3010/products'
-const table = document.querySelector("#products");
+const table = document.querySelector("#prod");
 const form_for_products = document.querySelector("#pform");
 const form_for_armoire = document.querySelector("#aform");
 
@@ -29,14 +29,19 @@ const get_products = () => fetch(URL_FOR_PRODUCTS+"?key=Nom")
     .then(json => constructTableProduct(json));
 
 const construct_picto = binary_seq => {
-    let mot_picto = "";
+    let mot_picto = "<td>";
     let i=1;
-    for(let P in binary_table){
-        if(binary_seq&P == P){
+    for(let P of binary_table){
+        if((binary_seq&P) == P){
             let pick = 'P'+i.toString()+'.jpg';
-            mot_picto += '<td><img src="'+pick+'"></td>';
+            mot_picto += '<img id="more" src="'+pick+'">';
         }
+        i+=1;
     }
+    if(mot_picto == "<td>"){
+        mot_picto += "Produit non dangereux";
+    }
+    mot_picto += "</td>";
     return mot_picto;
 };
 
@@ -49,10 +54,10 @@ const constructTableProduct = tab => {
         row.id = "?-" + item.id;
         row.innerHTML = `
         <td>${item.id}</td>
-        <td>${item.idType}</td>
-        <td>${item.idArmoir}</td>
-        <td>${item.DatePeremption}</td>
+        <td>${item.Nom}</td>
+        <td><img id="more" src="http://localhost:3010${item.Image}"></td>
         ${picto}
+        <td><a href="detailled_product.html?id=${item.id}"><img id="more" src="more.svg"></a></td>
         `;
         table.appendChild(row); 
     }
