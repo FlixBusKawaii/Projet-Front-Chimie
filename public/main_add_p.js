@@ -14,33 +14,11 @@ const binary_table = [
     0b010000000, 
     0b100000000, 
 ];
-/**
-function binary_search(List, Index, Column){
-    var First = 0;
-    var Last = List.length-1;
-    while(First <= Last){
-        var Middle = Math.floor((First+Last)/2);
-        if(List[Middle][Column] < Index){
-            Last = Middle + 1;
-        }
-        else if(List[Middle][Column] > Index){
-            Last = Middle - 1;
-        }
-        else{
-            return List[Middle];
-        }
-    }
-    return false;
-};*/
 
 let products_keys = ["id", "idType", "idArmoir", "DatePeremption"];
 let type_product_keys = ["idType", "Nom", "ImageP", "LienFicheDeSecurite", "Pictogramme"];
 let armoir_keys = ["idArmoir", "NomArmoire", "Localisation", "Image"];
 
-const check_Armor={
-    NomArmoire: /^[A-Za-z0-9-_]+$/,
-    Localisation: /^[A-Za-z0-9-_]+$/,
-};
 const check_Produit={
     idType: /^[0-9]+$/,
     DatePeremption: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/
@@ -48,8 +26,7 @@ const check_Produit={
 
 const get_products = () => fetch(URL_FOR_PRODUCTS)
     .then(res => res.json())
-    .then(json => constructTableProduct(json))
-    .then(json => constructTableArmoire(json));
+    .then(json => constructTableProduct(json));
 
 const construct_picto = binary_seq => {
     let mot_picto = "";
@@ -82,22 +59,6 @@ const constructTableProduct = tab => {
     }
 };
 
-const constructTableArmoire = tab => {
-    table.innerHTML = "";
-    for(let item of tab)
-    {
-        let row = document.createElement("tr");
-        row.id = "?-" + item.id;
-        row.innerHTML = `
-        <td>${item.idArmoire}</td>
-        <td>${item.NomArmoire}</td>
-        <td>${item.Localisation}</td>
-        <td>${item.Image}</td>
-        `;
-        table.appendChild(row); 
-    }
-};
-
 form_for_products.addEventListener("submit", event => {
     let type_of_data = 'Produit';
     let rawdata = new FormData(form);
@@ -118,26 +79,6 @@ form_for_products.addEventListener("submit", event => {
     return add_product(final_data);
 });
 
-form_for_armoire.addEventListener("submit", event => {
-    let type_of_data = 'Armor';
-    let rawdata = new FormData(form);
-    let data = {};
-    rawdata.forEach((value, key) => {
-        if(value.match(check_Armor[key]) == null){
-            document.getElementById("error").innerHTML = "Vérifiez les informations";
-            event.preventDefault();
-            return;
-        }
-        data[key] = value;
-    });
-    for(let input of document.querySelectorAll("form input:not([type='submit'])")){
-        input.value = "";
-    }
-    let final_data = {type_of_data, data};
-    event.preventDefault();
-    return add_armoire(final_data);
-});
-
 const add_product = item => fetch(URL_FOR_PRODUCTS, {
     method: "post",
     headers: {
@@ -145,19 +86,7 @@ const add_product = item => fetch(URL_FOR_PRODUCTS, {
     },
     body: JSON.stringify(item)
 })  .then(res=>res.text())
-    .then(armor=>{
-        alert("Votre produit a été placé dans l'armoire "+res+".");
-    }).then(get_products);
-
-const add_armoire = item => fetch(URL_FOR_PRODUCTS, {
-    method: "post",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify(item)
-})  .then(res=>res.text())
-    .then(armor=>{
-        alert("Votre produit a été placé dans l'armoire "+res+".");
-    }).then(get_products);
+    .then(alert("Votre produit a été placé dans l'armoire "+res+"."))
+    .then(get_products);
 
 get_products();
