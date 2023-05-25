@@ -3,18 +3,6 @@ const table = document.querySelector("#products");
 const form_for_products = document.querySelector("#pform");
 const form_for_armoire = document.querySelector("#aform");
 
-const binary_table = [
-    0b000000001, 
-    0b000000010, 
-    0b000000100, 
-    0b000001000, 
-    0b000010000, 
-    0b000100000, 
-    0b001000000, 
-    0b010000000, 
-    0b100000000, 
-];
-
 let products_keys = ["id", "idType", "idArmoir", "DatePeremption"];
 let type_product_keys = ["idType", "Nom", "ImageP", "LienFicheDeSecurite", "Pictogramme"];
 let armoir_keys = ["idArmoir", "NomArmoire", "Localisation", "Image"];
@@ -42,7 +30,6 @@ form_for_armoire.addEventListener("submit", event => {
         input.value = "";
     }
     let final_data = {key:type_of_data, data:data};
-    console.log(final_data);
     event.preventDefault();
     return add_armoire(final_data);
 });
@@ -56,4 +43,3 @@ const add_armoire = item => fetch(URL_FOR_PRODUCTS, {
 }).then(()=>
         {alert("L'armoire a été placé.");
         document.location.href="recap_armoire.html";});
-   
