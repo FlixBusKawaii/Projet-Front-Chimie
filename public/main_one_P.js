@@ -14,7 +14,18 @@ const check_Produit={
 
 let current_product;
 
-const get_more_of_P = () => {
+const load_P=()=>{
+    fetch(URL_FOR_PRODUCTS+"?key=id&data"+document.location.search.get("id"))
+    .then(res => res.json())
+    .then(json => constructProduct(json));
+}
+
+const constructProduct=product=>{
+    console.log(product);
+}
+
+
+/*const get_more_of_P = () => {
     let new_user = {};
     let row = document.getElementById("user-" + current_product.id);
     let row_data = row.children;
@@ -28,4 +39,4 @@ const get_more_of_P = () => {
     ${picto}
     `;
     table.appendChild(row);
-};
+};*/
