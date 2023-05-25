@@ -24,25 +24,7 @@ const check_Armor={
     Localisation: /^[A-Za-z0-9-_]+$/,
 };
 
-const get_armoires = () => fetch(URL_FOR_PRODUCTS)
-    .then(res => res.json())
-    .then(json => constructTableArmoire(json));
 
-const constructTableArmoire = tab => {
-    table.innerHTML = "";
-    for(let item of tab)
-    {
-        let row = document.createElement("tr");
-        row.id = "?-" + item.id;
-        row.innerHTML = `
-        <td>${item.idArmoire}</td>
-        <td>${item.NomArmoire}</td>
-        <td>${item.Localisation}</td>
-        <td>${item.Image}</td>
-        `;
-        table.appendChild(row); 
-    }
-};
 
 form_for_armoire.addEventListener("submit", event => {
     let type_of_data = 'Armor';
@@ -59,7 +41,8 @@ form_for_armoire.addEventListener("submit", event => {
     for(let input of document.querySelectorAll("form input:not([type='submit'])")){
         input.value = "";
     }
-    let final_data = {type_of_data, data};
+    let final_data = {key:type_of_data, data:data};
+    console.log(final_data);
     event.preventDefault();
     return add_armoire(final_data);
 });
@@ -70,9 +53,7 @@ const add_armoire = item => fetch(URL_FOR_PRODUCTS, {
         "Content-Type": "application/json"
     },
     body: JSON.stringify(item)
-})  .then(res=>res.text())
-    .then(res=>{
-        alert("Votre produit a été placé dans l'armoire "+res+".");
-    }).then(document.location.href="recap_armoire.html");
-
-get_armoires();
+}).then(()=>
+        {alert("L'armoire a été placé.");
+        document.location.href="recap_armoire.html";});
+   

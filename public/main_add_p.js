@@ -24,40 +24,6 @@ const check_Produit={
     DatePeremption: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/
 };
 
-const get_products = () => fetch(URL_FOR_PRODUCTS+"?key=Nom")
-    .then(res => res.json());
-/*
-const construct_picto = binary_seq => {
-    let mot_picto = "";
-    let i=1;
-    for(let P of binary_table){
-        if(binary_seq&P == P){
-            let pick = 'P'+i.toString()+'.jpg';
-            mot_picto += '<td><img src="'+pick+'"></td>';
-        }
-        i += 1;
-    }
-    return mot_picto;
-};
-
-const constructTableProduct = tab => {
-    table.innerHTML = "";
-    for(let item of tab)
-    {
-        let picto = construct_picto(item.Pictogramme);
-        let row = document.createElement("tr");
-        row.id = "?-" + item.id;
-        row.innerHTML = `
-        <td>${item.id}</td>
-        <td>${item.idType}</td>
-        <td>${item.idArmoir}</td>
-        <td>${item.DatePeremption}</td>
-        ${picto}
-        `;
-        table.appendChild(row); 
-    }
-};*/
-
 form_for_products.addEventListener("submit", event => {
     let type_of_data = 'Produit';
     let rawdata = new FormData(form_for_products);
@@ -95,5 +61,3 @@ const add_product = item => fetch(URL_FOR_PRODUCTS, {
         }
 })
     .then(document.location.href="recap_produit.html");
-
-get_products();
