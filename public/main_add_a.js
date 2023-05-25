@@ -46,7 +46,7 @@ const constructTableArmoire = tab => {
 
 form_for_armoire.addEventListener("submit", event => {
     let type_of_data = 'Armor';
-    let rawdata = new FormData(form);
+    let rawdata = new FormData(form_for_armoire);
     let data = {};
     rawdata.forEach((value, key) => {
         if(value.match(check_Armor[key]) == null){
@@ -71,8 +71,8 @@ const add_armoire = item => fetch(URL_FOR_PRODUCTS, {
     },
     body: JSON.stringify(item)
 })  .then(res=>res.text())
-    .then(armor=>{
+    .then(res=>{
         alert("Votre produit a été placé dans l'armoire "+res+".");
-    }).then(get_armoires);
+    }).then(document.location.href="recap_armoire.html");
 
 get_armoires();

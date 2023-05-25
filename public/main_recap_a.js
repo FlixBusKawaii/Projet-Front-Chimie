@@ -1,5 +1,5 @@
 const URL_FOR_PRODUCTS = 'http://localhost:3010/products'
-const table = document.querySelector("#products");
+const table = document.querySelector("#armor");
 const form_for_products = document.querySelector("#pform");
 const form_for_armoire = document.querySelector("#aform");
 
@@ -24,7 +24,7 @@ const check_Armor={
     Localisation: /^[A-Za-z0-9-_]+$/,
 };
 
-const get_armoires = () => fetch(URL_FOR_PRODUCTS)
+const get_armoires = () => fetch(URL_FOR_PRODUCTS+"?key=Armor")
     .then(res => res.json())
     .then(json => constructTableArmoire(json));
 
@@ -38,7 +38,6 @@ const constructTableArmoire = tab => {
         <td>${item.idArmoire}</td>
         <td>${item.NomArmoire}</td>
         <td>${item.Localisation}</td>
-        <td>${item.Image}</td>
         `;
         table.appendChild(row); 
     }

@@ -74,7 +74,6 @@ form_for_products.addEventListener("submit", event => {
         input.value = "";
     }
     let final_data = {key:type_of_data, data:data};
-    console.log(final_data);
     event.preventDefault();
     return add_product(final_data);
 });
@@ -87,9 +86,14 @@ const add_product = item => fetch(URL_FOR_PRODUCTS, {
     body: JSON.stringify(item)
 })  .then(res=>res.text())
     .then(res=>{
-        console.log(res);
-        alert("Votre produit a été placé dans l'armoire "+res+".");
+        if(!isNaN(parseInt(res)))
+        {
+            alert("Votre produit a été placé dans l'armoire "+res+".");
+        }
+        else{
+            alert(res);
+        }
 })
-    .then(get_products);
+    .then(document.location.href="recap_produit.html");
 
 get_products();
