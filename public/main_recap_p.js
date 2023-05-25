@@ -24,7 +24,7 @@ const check_Produit={
     DatePeremption: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/
 };
 
-const get_products = () => fetch(URL_FOR_PRODUCTS)
+const get_products = () => fetch(URL_FOR_PRODUCTS+"?key=Nom")
     .then(res => res.json())
     .then(json => constructTableProduct(json));
 
@@ -57,9 +57,5 @@ const constructTableProduct = tab => {
         table.appendChild(row); 
     }
 };
-
-const get_more_of_P = () => {
-    
-}
 
 get_products();
