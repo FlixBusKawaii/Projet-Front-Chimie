@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="main_add_p.js" defer></script>
 </head>
-<body>
+<body onload="get_type_products()">
     <div>
         <h1>Service de rangement des produits du laboratoire</h1>
         <h5>Pour rappel : les produits doivent être rangés selon les règles de sécurité</h5>
@@ -34,6 +34,19 @@
             <input value="Ajouter un produit" type="submit">
             <p id="error"></p>
         </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nom du produit</th>
+                    <th>Image</th>
+                    <th>Pictogramme</th>
+                </tr>
+            </thead>
+            <tbody id="products">
+                
+            </tbody>
+        </table>
     </div>
 </body>
 </html>

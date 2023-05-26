@@ -61,3 +61,42 @@ const add_product = item => fetch(URL_FOR_PRODUCTS, {
         }
 })
     .then(document.location.href="recap_produit.html");
+
+const construct_picto = binary_seq => {
+    let mot_picto = "<td>";
+    let i=1;
+    for(let P of binary_table){
+        if((binary_seq&P) == P){
+            let pick = 'P'+i.toString()+'.jpg';
+            mot_picto += '<img id="more" src="'+pick+'">';
+        }
+        i+=1;
+    }
+    if(mot_picto == "<td>"){
+        mot_picto += "Produit non dangereux";
+    }
+    mot_picto += "</td>";
+    return mot_picto;
+};
+
+const constructTableProduct = tab => {
+    table.innerHTML = "";
+    for(let item of tab)
+    {
+        let picto = construct_picto(item.Pictogramme);
+        let row = document.createElement("tr");
+        row.id = "?-" + item.id;
+        row.innerHTML = `
+        <td>${item.id}</td>
+        <td>${item.Nom}</td>
+        <td><img id="more" src="http://localhost:3010${item.Image}"></td>
+        ${picto}
+        <td><a href="detailled_product.html?id=${item.id}"><img id="more" src="more.svg"></a></td>
+        `;
+        table.appendChild(row); 
+    }
+};
+
+const get_type_products = () => fetch(URL_FOR_PRODUCTS+"?key=Type")
+    .then(res => res.json())
+    .then(json => constructTableProduct(json));
